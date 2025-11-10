@@ -42,7 +42,15 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
   }, [people, sortBy, searchParams, sortOrder]);
 
   if (slug && !currentSlug) {
-    return <Navigate to="/people" replace />;
+    return (
+      <Navigate
+        to={{
+          pathname: '/people',
+          search: searchParams.toString(),
+        }}
+        replace
+      />
+    );
   }
 
   if (currentPeople.length <= 0) {

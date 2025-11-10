@@ -7,12 +7,17 @@ import { getSearchWith } from '../utils/searchHelper';
 
 export const PeopleFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [inputTitle, setInputTitle] = useState<string>('');
+  const query = searchParams.get('query') || '';
+
+  const [inputTitle, setInputTitle] = useState<string>(query);
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputTitle(event.target.value);
+    const value = event.target.value;
+
+    setInputTitle(value);
+
     const newSearch = getSearchWith(searchParams, {
-      query: event.target.value,
+      query: value === '' ? null : value,
     });
 
     setSearchParams(newSearch);
