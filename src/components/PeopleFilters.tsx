@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { CenturyLink } from './CenturyLink';
 import { SearchLink } from './SearchLink';
 import { useSearchParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getSearchWith } from '../utils/searchHelper';
 
 export const PeopleFilters = () => {
@@ -10,6 +10,10 @@ export const PeopleFilters = () => {
   const query = searchParams.get('query') || '';
 
   const [inputTitle, setInputTitle] = useState<string>(query);
+
+  useEffect(() => {
+    setInputTitle(query);
+  }, [query]);
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
